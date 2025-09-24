@@ -3,6 +3,10 @@ import io
 import os
 import Dynasty
 import GameOfThronesGraph
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+#%matplotlib inline
 
 file_name = "data/game-of-thrones-characters-groups.json"
 path="data"
@@ -35,8 +39,36 @@ for data in json_data['groups']:
 
 corpusData=json_data['groups']
 GameOfThronesHouses=GameOfThronesGraph.GameOfThronesGraph(corpusData)
-print(GameOfThronesHouses.houses)
+#print(GameOfThronesHouses.houses)
+
 if "Stark" in GameOfThronesHouses:
     print("stark is here!!!")
+
+visualisationData={}
+legendData=[]
 for house in GameOfThronesHouses:
-    print(f"This is a House of {house}!")
+  print(house)
+  print(f"Strength: {house.getStrength()}")
+  visualisationData[house.name]=house.getStrength()
+  legendData.append(house.name)
+print(visualisationData)
+print(legendData)
+
+
+# #Configure your x and y values from the dictionary:
+# x= list(visualisationData.keys())
+# y= list(visualisationData.values())
+
+# #Create the graph = create seaborn barplot
+# ax=sns.barplot(x=x,y=y)
+
+# #specfiy axis labels
+# ax.legend(legendData)
+# sns.move_legend(ax, "upper left", bbox_to_anchor=(1.05, 1))
+# ax.set(xlabel='Houses',
+#        ylabel='Strength (N family members)',
+#        title='Strength of GameOfThronesHouses')
+
+# plt.xticks(rotation=45)
+# #display barplot
+# plt.show()
