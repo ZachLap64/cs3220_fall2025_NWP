@@ -6,7 +6,9 @@ import GameOfThronesGraph
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-#%matplotlib inline
+import networkx as nx
+import seaborn as sns
+from pyvis.network import Network
 
 file_name = "data/game-of-thrones-characters-groups.json"
 path="data"
@@ -62,7 +64,7 @@ print(legendData)
 # #Create the graph = create seaborn barplot
 # ax=sns.barplot(x=x,y=y)
 
-# #specfiy axis labels
+# #specifyy axis labels
 # ax.legend(legendData)
 # sns.move_legend(ax, "upper left", bbox_to_anchor=(1.05, 1))
 # ax.set(xlabel='Houses',
@@ -72,3 +74,89 @@ print(legendData)
 # plt.xticks(rotation=45)
 # #display barplot
 # plt.show()
+
+
+g = nx.Graph() # graph initialization
+
+N_houses=0
+colorKeys=[]
+for house in GameOfThronesHouses:
+    if house.name!="Include":
+        N_houses+=1
+        colorKeys.append(house.name)
+sns.color_palette("husl", N_houses) # N_houses colors
+#print(colorKeys)
+nodeColors=dict(zip(colorKeys, [tuple(int(c*255) for c in cs) for cs in sns.color_palette("husl", N_houses)]))
+#print(nodeColors)
+
+for house in GameOfThronesHouses:
+  if house.name!="Include":
+    # add the house's name as a node to the graph g (houses's strength values is used as a node's size)
+    g.add_node(house.name, size=house.getStrength())
+    for character in house.characters:
+      g.add_node(character)
+
+for node, attributes in g.nodes(data=True): # run this code to check your code above
+  print(f"Node: {node}, Attributes: {attributes}")
+
+#-------------------------------------------
+#Just characters and house names for edges
+myEdges = []
+for house in GameOfThronesHouses: #every house
+  if house.name!="Include": #ignoring Include since its just a list of character not in houses
+    tmp = [] #temp list for internal connections, resetting with each new house
+    for person in house: #for each person in a house
+      myEdges.append((person, house.name)) #add edge between person and their house
+#-------------------------------------------
+#-------------------------------------------
+#Characters have edges with houses and edges with each other
+# myEdges = []
+# for house in GameOfThronesHouses: #every house
+#   if house.name!="Include": #ignoring Include since its just a list of character not in houses
+#     tmp = [] #temp list for internal connections, resetting with each new house
+#     for person in house: #for each person in a house
+#       myEdges.append((person, house.name)) #add edge between person and their house
+#       tmp.append(person) #add person to tmp list
+#       for ch in tmp: #we will make edge with person and everyone in the tmp list already
+#         if ch != person: #no edges with yourself, not sure if required
+#           myEdges.append((ch, person)) #add edge between person and house member in temp list
+#-------------------------------------------
+
+  #bad code I want to ask hannah about
+      # for other in house: #for each person in the same house again
+      #   if person != other: #don't make an edge with yourself
+      #     if (person, other) not in myEdges: #if edge is not already present
+      #       myEdges.append((person, other)) #add edge between person and another in the house
+
+
+
+print("Connections between a House and its family members:") # run this code to check your code above
+print(myEdges)
+
+g.add_edges_from(myEdges) # run this code to add edges to our graph g
+list(g.edges)# run this code  to check the edges in our graph g
+print(len(list(g.edges))) # N of edges =89!!! check yours :)
+
+GameOfThronesNet = Network(
+                bgcolor ="#242020",
+                font_color = "white",
+                height = "1000px",
+                width = "100%",
+                notebook=True,
+                cdn_resources = "remote")
+
+# generate the graph
+GameOfThronesNet.from_nx(g) 
+
+for node in GameOfThronesNet.nodes:
+    if node["id"] in GameOfThronesHouses:
+        # Convert RGB to hexadecimal string
+        node["color"] = '#%02x%02x%02x' % nodeColors[node["id"]]
+    else:
+        for house in GameOfThronesHouses: 
+            if house.name !="Include":# apple the coloer of the House to this family member
+                if node["id"] in house:
+                    node["color"] = '#%02x%02x%02x' % nodeColors[house.name]
+
+print(GameOfThronesNet.nodes)
+GameOfThronesNet.show("GameOfThronesNet.html",notebook=False)
