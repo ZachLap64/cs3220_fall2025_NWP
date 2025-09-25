@@ -104,7 +104,6 @@ for node, attributes in g.nodes(data=True): # run this code to check your code a
 myEdges = []
 for house in GameOfThronesHouses: #every house
   if house.name!="Include": #ignoring Include since its just a list of character not in houses
-    tmp = [] #temp list for internal connections, resetting with each new house
     for person in house: #for each person in a house
       myEdges.append((person, house.name)) #add edge between person and their house
 #-------------------------------------------
