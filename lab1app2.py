@@ -107,8 +107,8 @@ def main():
         visualisationData={}
         legendData=[]
         for house in GameOfThronesHouses:
-            st.print(house)
-            st.print(f"Strength: {house.getStrength()}")
+            st.write(house)
+            st.write(f"Strength: {house.getStrength()}")
             visualisationData[house.name]=house.getStrength()
             legendData.append(house.name)
 
@@ -137,11 +137,11 @@ def main():
             house=Dynasty.Dynasty(data['name'])
             for character in data['characters']:
                 house.append(character)
-            st.print(house)
-            st.print("Our members:")
+            st.write(house)
+            st.write("Our members:")
             for person in house:
-                st.print(person)
-            st.print(f"We have {house.getStrength()} family members!!!")
+                st.write(person)
+            st.write(f"We have {house.getStrength()} family members!!!")
 
     with tab3:
         st.header("Graph for Game of Thrones Houses")
