@@ -30,7 +30,6 @@ KingNodes = set(Akings.flatten()).union(set(Dkings.flatten()))
 
 for i in KingNodes:
     net5kings.add_node(i,value=1)
-#net5kings.add_nodes(KingNodes)
 #print(net5kings.nodes)
 
 ## get the start->end of the edges
@@ -61,16 +60,12 @@ for i in tIndexes:
 for i in range(realEdges.__len__()):
     fr = realEdges[i][0]
     to = realEdges[i][1]
-    #wght = count.iloc[i]
     for j in range(len(count)):
         if count.index[j][0] == fr:
             if count.index[j][1] == to:
                 wght = count.iloc[j]
                 ttl = tEdges[j]
                 break
-    #ttl = tEdges[i]
-    #print("from: " + fr + ", to: " + to + ", weight: "+ str(wght) + ", \nbattles: ")
-    #print(ttl)
     net5kings.add_edge(fr,to, value=int(wght), title=ttl)
 #print(net5kings.edges)
 
