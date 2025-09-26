@@ -107,8 +107,8 @@ def main():
         visualisationData={}
         legendData=[]
         for house in GameOfThronesHouses:
-            print(house)
-            print(f"Strength: {house.getStrength()}")
+            st.print(house)
+            st.print(f"Strength: {house.getStrength()}")
             visualisationData[house.name]=house.getStrength()
             legendData.append(house.name)
 
@@ -128,7 +128,8 @@ def main():
 
         plt.xticks(rotation=45)
         #display barplot
-        plt.show()
+        #plt.show()
+        st.pyplot(plt)
 
     with tab2:
         st.header("Members of Houses")
@@ -136,11 +137,11 @@ def main():
             house=Dynasty.Dynasty(data['name'])
             for character in data['characters']:
                 house.append(character)
-            print(house)
-            print("Our members:")
+            st.print(house)
+            st.print("Our members:")
             for person in house:
-                print(person)
-            print(f"We have {house.getStrength()} family members!!!")
+                st.print(person)
+            st.print(f"We have {house.getStrength()} family members!!!")
 
     with tab3:
         st.header("Graph for Game of Thrones Houses")
