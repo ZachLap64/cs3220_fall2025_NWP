@@ -34,15 +34,15 @@ class CatFriendlyHouse(Environment):
             elif action == "Drink":
                 if self.status[agent.location] == "MilkHere":
                     self.status[agent.location] = "empty"
-                    sg = Sausage.Sausage()
-                    agent.performance += sg.calories * sg.weight
+                    mk = Milk.Milk()
+                    agent.performance += mk.calories * mk.weight
                 else:
                     agent.performance -= 1
             elif action == "Eat":
                 if self.status[agent.location] == "SausageHere":
                     self.status[agent.location] = "empty"
-                    mk = Milk.Milk()
-                    agent.performance += mk.calories * mk.weight
+                    sg = Sausage.Sausage()
+                    agent.performance += sg.calories * sg.weight
                 else:
                     agent.performance -= 1
 
