@@ -12,7 +12,7 @@ class environmentPro(Environment):
     return [thing for thing in self.things if thing.location == location and isinstance(thing, thingClass)]
 
   def add_thing(self, thing, location=None):
-    from agentClass import Agent
+    from src.agentClass import Agent
     if thing in self.agents:
       print("Can't add the same agent twice")
     else:
