@@ -50,8 +50,8 @@ def rule_match(state, rules):
 
 
 #The code below -> for Task3 of the Assignment
-from src.Task3YourClasses import OfficeManager, ITStaff, Student
-from src.locations import loc_D
+
+
 
 def interpret_input_A2pro(percept):
   loc, percepts = percept
@@ -65,7 +65,7 @@ def interpret_input_A2pro(percept):
     for p in percepts:
       if isinstance(p, OfficeManager):
         return 'Office manager'
-      elif isinstance(p, ITStaff):
+      elif isinstance(p, ITStuff):
         return 'IT'
       elif isinstance(p, Student):
         return 'Student'
