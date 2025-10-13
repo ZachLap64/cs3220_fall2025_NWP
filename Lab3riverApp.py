@@ -117,7 +117,7 @@ def main():
         st.header("_Initial Env._", divider=True)
         
         riverWorldGraph = riverGraph(riverWorld, riverStatesLocations())
-        nodeColors=makeDefaultColors(riverGraph.graph_dict)
+        nodeColors=makeDefaultColors(riverGraph.graph_dict())
         
         initState="LLLL"
         goalState="RRRR"
