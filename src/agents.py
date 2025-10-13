@@ -32,9 +32,13 @@ from src.PS_agentPrograms import *
 from src.vacuumProblemSolvingAgentSMARTClass import VacuumProblemSolvingAgentSMART
 #from vacuumProblemSolvingAgentShowClass import VacuumProblemSolvingAgentDraw
 from src.navProblemSolvingAgentClass import navProblemSolvingAgent
+from src.riverProblemSolvingSMARTAgentClass import RiverProblemSolvingAgentSMART
 
 def ProblemSolvingVacuumAgentBFS(initState,vacuumWorldGraph,goalState):
     return VacuumProblemSolvingAgentSMART(initState,vacuumWorldGraph,goalState,BestFirstSearchAgentProgram())
+
+def ProblemSolvingRiverAgentBFS(initState,riverWorldGraph,goalState):
+    return RiverProblemSolvingAgentSMART(initState,riverWorldGraph,goalState,BestFirstSearchAgentProgram())
 
  
 def ProblemSolvingNavAgentBFS(initState,WorldGraph,goalState):
