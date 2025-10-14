@@ -28,23 +28,24 @@ def drawBtn(e,a,c):
 def AgentStep(opt):
     st.header("Resolving River Problem ...")
     e,a,c= opt[0],opt[1],opt[2]
-    if not st.session_state["clicked"]:
-        st.session_state["env"]=e
-        st.session_state["agent"]=a
-        st.session_state["nodeColors"]=c    
+    st.write(a("LLLL"))
+    # if not st.session_state["clicked"]:
+    #     st.session_state["env"]=e
+    #     st.session_state["agent"]=a
+    #     st.session_state["nodeColors"]=c  
     
-    if e.is_agent_alive(a):
-        e.step()
-        st.success(" Agent now at : {}.".format(a.state))
-        st.info("Current Agent performance {}:".format(a.performance))
-        c[a.state]="orange"
-        st.info("State of the Environment:")
-        buildGraph(e.status, c) 
-    else:
-        if a.state==a.goal:
-            st.success(" Agent now at the goal state: {}.".format(a.state))
-        else:
-            st.error("Agent in location {} and it is dead.".format(a.state))
+    # if e.is_agent_alive(a):
+    #     e.step()
+    #     st.success(" Agent now at : {}.".format(a.state))
+    #     st.info("Current Agent performance {}:".format(a.performance))
+    #     c[a.state]="orange"
+    #     st.info("State of the Environment:")
+    #     buildGraph(e.status, c) 
+    # else:
+    #     if a.state==a.goal:
+    #         st.success(" Agent now at the goal state: {}.".format(a.state))
+    #     else:
+    #         st.error("Agent in location {} and it is dead.".format(a.state))
         
     st.session_state["clicked"] = True
         
