@@ -28,7 +28,7 @@ def drawBtn(e,a,c):
 def AgentStep(opt):
     st.header("Resolving River Problem ...")
     e,a,c= opt[0],opt[1],opt[2]
-    st.write(a("LLLL"))
+    a("LLLL")
     # if not st.session_state["clicked"]:
     #     st.session_state["env"]=e
     #     st.session_state["agent"]=a
@@ -132,7 +132,7 @@ def main():
         buildGraph(riverWorldGraph, nodeColors)
         st.info(f"The Agent in: {BFSagent1.state} with performance {BFSagent1.performance}.")
         st.info(f"The Agent goal is: {BFSagent1.goal} .")
-                
+        BFSagent1("LLLL")
         drawBtn(rp1,BFSagent1,nodeColors)
     
             
