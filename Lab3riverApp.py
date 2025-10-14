@@ -138,7 +138,7 @@ def main():
             
         
     if st.session_state["clicked"]:
-        if st.session_state["env"].is_agent_alive(st.session_state["agent"]):
+        #if st.session_state["env"].is_agent_alive(st.session_state["agent"]):
             #st.warning("Agent Step Done!")
             st.success(" Agent is working...")
             drawBtn(st.session_state["env"],st.session_state["agent"], st.session_state["nodeColors"])
