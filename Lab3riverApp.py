@@ -126,8 +126,8 @@ def main():
         BFSagent1=ProblemSolvingRiverAgentBFS(initState,riverWorldGraph,goalState) 
                       
         st.header("State of the Environment", divider="red")
-        nodeColors[rp1.state]="red"
-        nodeColors[rp1.goal]="green"
+        nodeColors[BFSagent1.state]="red"
+        nodeColors[BFSagent1.goal]="green"
         buildGraph(riverWorldGraph, nodeColors)
         st.info(f"The Agent in: {BFSagent1.state} with performance {BFSagent1.performance}.")
         st.info(f"The Agent goal is: {BFSagent1.goal} .")
