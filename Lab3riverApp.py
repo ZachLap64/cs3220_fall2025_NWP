@@ -5,7 +5,8 @@ import streamlit.components.v1 as components #to display the HTML code
 import networkx as nx #Networkx for creating graph data
 from pyvis.network import Network #to create the graph as an interactive html object
 
-
+import sys
+import io
 
 from src.graphClass import Graph
 from src.riverGraphClass import riverGraph
@@ -133,10 +134,24 @@ def main():
         st.info(f"The Agent in: {BFSagent1.state} with performance {BFSagent1.performance}.")
         st.info(f"The Agent goal is: {BFSagent1.goal} .")
         #BFSagent1("LLLL")
-        st.write("Solution (a sequence of actions) from the initial state to a goal:")
-        BFSagent1("LLLL")
+        # st.write("Solution (a sequence of actions) from the initial state to a goal:")
+        # BFSagent1("LLLL")
         #st.write(t)
-        drawBtn(rp1,BFSagent1,nodeColors)
+        
+        # Redirect stdout to a string buffer
+        old_stdout = sys.stdout
+        redirected_output = io.StringIO()
+        sys.stdout = redirected_output
+
+        # Code that uses print()
+        BFSagent1("LLLL")
+
+        # Restore stdout and display the captured output in Streamlit
+        sys.stdout = old_stdout
+        st.text(redirected_output.getvalue())
+
+        #button broken
+        #drawBtn(rp1,BFSagent1,nodeColors)
     
             
         
