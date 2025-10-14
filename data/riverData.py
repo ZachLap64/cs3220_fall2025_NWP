@@ -43,20 +43,20 @@ RRRR=''.join(map(lambda x: x[0],(riverWorldStates[1],riverWorldStates[1], riverW
 
 riverWorld = (dict(
     LLLL=dict(boat=LLLR, takeWolf=RLLR, takeGoat=LRLR, takeCabbage=LLRR),
-    LLLR=dict(boat=LLLL, takeWolf=LLLR, takeGoat=LLLR, takeCabbage=LLLR),
+    LLLR=dict(boat=LLLR, takeWolf=LLLR, takeGoat=LLLR, takeCabbage=LLLR),#bad
     LLRL=dict(boat=LLRR, takeWolf=RLRR, takeGoat=LRRR, takeCabbage=LLRL),
-    LLRR=dict(boat=LLRL, takeWolf=LLRR, takeGoat=LLRR, takeCabbage=LLLL),
+    LLRR=dict(boat=LLRR, takeWolf=LLRR, takeGoat=LLRR, takeCabbage=LLRR),#bad
     LRLL=dict(boat=LRLR, takeWolf=RRLR, takeGoat=LRLL, takeCabbage=LRRR),
     LRLR=dict(boat=LRLL, takeWolf=LRLR, takeGoat=LLLL, takeCabbage=LRLR),
-    LRRL=dict(boat=LRRR, takeWolf=RRRR, takeGoat=LRRL, takeCabbage=LRRL),
+    LRRL=dict(boat=LRRL, takeWolf=LRRL, takeGoat=LRRL, takeCabbage=LRRL),#bad
     LRRR=dict(boat=LRRL, takeWolf=LRRR, takeGoat=LLRL, takeCabbage=LRLL),
     RLLL=dict(boat=RLLR, takeWolf=RLLL, takeGoat=RRLR, takeCabbage=RLRR),
-    RLLR=dict(boat=RLLL, takeWolf=LLLL, takeGoat=RLLR, takeCabbage=RLLR),
+    RLLR=dict(boat=RLLR, takeWolf=RLLR, takeGoat=RLLR, takeCabbage=RLLR),#bad
     RLRL=dict(boat=RLRR, takeWolf=RLRL, takeGoat=RRRR, takeCabbage=RLRL),
     RLRR=dict(boat=RLRL, takeWolf=LLRL, takeGoat=RLRR, takeCabbage=RLLL),
-    RRLL=dict(boat=RRLR, takeWolf=RRLL, takeGoat=RRLL, takeCabbage=RRRR),
+    RRLL=dict(boat=RRLR, takeWolf=RRLL, takeGoat=RRLL, takeCabbage=RRRR),#bad
     RRLR=dict(boat=RRLL, takeWolf=LRLL, takeGoat=RLLL, takeCabbage=RRLR),
-    RRRL=dict(boat=RRRR, takeWolf=RRRL, takeGoat=RRRL, takeCabbage=RRRL),
+    RRRL=dict(boat=RRRL, takeWolf=RRRL, takeGoat=RRRL, takeCabbage=RRRL),#bad
     RRRR=dict(boat=RRRL, takeWolf=LRRL, takeGoat=RLRL, takeCabbage=RRLL)
 ))
 
