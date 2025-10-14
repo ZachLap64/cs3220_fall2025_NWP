@@ -65,7 +65,7 @@ def buildGraph(graphData, nodeColorsDict):
     # add the nodes
     for node in riverWorldGraph.nodes():
         x,y=riverWorldGraph.getLocation(node)
-        net_RiverWorld.add_node(node, x=x, y=y, physics=False, color=nodeColorsDict[node])
+        net_RiverWorld.add_node(node, x=x, y=y, color=nodeColorsDict[node])
     
     # add the edges
     edge_weights = {(k, v2) : k2 for k, v in riverWorld.items() for k2, v2 in v.items()}#actions
@@ -122,16 +122,17 @@ def main():
         goalState="RRRR"
         
         rp1=RiverProblem(initState,goalState,riverWorldGraph)
-        rpsa1=RiverProblemSolvingAgent(initState,riverWorldGraph,goalState)       
+        rpsa1=RiverProblemSolvingAgent(initState,riverWorldGraph,goalState)
+        BFSagent1=ProblemSolvingRiverAgentBFS(initState,riverWorldGraph,goalState) 
                       
         st.header("State of the Environment", divider="red")
-        nodeColors[rpsa1.state]="red"
-        nodeColors[rpsa1.goal]="green"
+        nodeColors[rp1.state]="red"
+        nodeColors[rp1.goal]="green"
         buildGraph(riverWorldGraph, nodeColors)
-        st.info(f"The Agent in: {rpsa1.state} with performance {rpsa1.performance}.")
-        st.info(f"The Agent goal is: {rpsa1.goal} .")
+        st.info(f"The Agent in: {BFSagent1.state} with performance {BFSagent1.performance}.")
+        st.info(f"The Agent goal is: {BFSagent1.goal} .")
                 
-        drawBtn(rp1,rpsa1,nodeColors)
+        drawBtn(rp1,BFSagent1,nodeColors)
     
             
         

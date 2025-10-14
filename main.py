@@ -23,19 +23,19 @@ net_RiverWorld = Network( heading="Lab3. River World Problem",
                 directed = True, 
 ) # do this
 
-print(riverWorldGraph.nodes())
+#print(riverWorldGraph.nodes())
 #net_VacuumWorld.add_nodes(vacuumWorldGraph.nodes())
 
 for node in riverWorldGraph.nodes():
     x,y=riverWorldGraph.getLocation(node)
-    net_RiverWorld.add_node(node, x=x, y=y, physics=False)
+    net_RiverWorld.add_node(node, x=x, y=y)
 # print(riverWorldGraph.get(("LRLR")))
 # print(riverWorld)
 
 edge_weights = {(k, v2) : k2 for k, v in riverWorld.items() for k2, v2 in v.items()}#actions
-print(edge_weights)
+#print(edge_weights)
 
-print(len(edge_weights))
+#print(len(edge_weights))
 
 edges=[]
 for node_source in riverWorldGraph.nodes():
@@ -55,21 +55,21 @@ goalState = "RRRR"
 
 rp1=RiverProblem(initState,goalState,riverWorldGraph)
 #print(riverWorldGraph.graph_dict)
-print(rp1.actions("LLRL"))
-print(rp1.result("LLRL", 'boat'),rp1.result("LLRL", 'takeWolf'),rp1.result("LLRL", 'takeGoat'),rp1.result("LLRL", 'takeCabbage'))
+#print(rp1.actions("LLRL"))
+#print(rp1.result("LLRL", 'boat'),rp1.result("LLRL", 'takeWolf'),rp1.result("LLRL", 'takeGoat'),rp1.result("LLRL", 'takeCabbage'))
 cost=0
 #rp1.path_cost(cost, "DCR", 'Suck',"DCR")
-print(initState, goalState)
+#print(initState, goalState)
 rpsa1=RiverProblemSolvingAgent(initState,riverWorldGraph,goalState)
-print(rpsa1.formulate_problem(rpsa1.state,rpsa1.goal).actions("LLRL"))
+#print(rpsa1.formulate_problem(rpsa1.state,rpsa1.goal).actions("LLRL"))
 BFSAP1=BestFirstSearchAgentProgram()
-print(rp1.initial)
+#print(rp1.initial)
 seq=BFSAP1(rp1)
-print(seq)
+#print(seq)
 
 
 BFSagent1=ProblemSolvingRiverAgentBFS(initState,riverWorldGraph,goalState)
-print(BFSagent1.seq) # no solution at the very begining
+#print(BFSagent1.seq) # no solution at the very begining
 BFSagent1("LLLL") # the  __call__ method with the percept as a parameter
 BFSagent1("RRRR")
 BFSagent2=ProblemSolvingRiverAgentBFS("LLLL",riverWorldGraph,goalState)
