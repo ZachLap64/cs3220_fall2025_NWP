@@ -75,10 +75,9 @@ def buildGraph(graphData, nodeColorsDict):
         #action=riverWorld[node_source]
         #print(action)
             if (node_source,node_target) not in edges and (node_target, node_source):
-                #net_VacuumWorld.add_edge(node_source,node_target, label=str(action))
-                net_RiverWorld.add_edge(node_source,node_target, label=edge_weights[(node_source,node_target)])
+                net_RiverWorld.add_edge(node_source, node_target, label=edge_weights[(node_source,node_target)])
                 edges.append((node_source,node_target))              
-    riverWorldGraph.add_edges_from(edges)
+    #riverWorldGraph.add_edges_from(edges)
     
     # generate the graph
     net_RiverWorld.from_nx(riverWorldGraph)
