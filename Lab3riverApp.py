@@ -133,6 +133,7 @@ def main():
         st.info(f"The Agent in: {BFSagent1.state} with performance {BFSagent1.performance}.")
         st.info(f"The Agent goal is: {BFSagent1.goal} .")
         #BFSagent1("LLLL")
+        st.write("Solution (a sequence of actions) from the initial state to a goal: {}".format(BFSagent1("LLLL")))
         drawBtn(rp1,BFSagent1,nodeColors)
     
             
