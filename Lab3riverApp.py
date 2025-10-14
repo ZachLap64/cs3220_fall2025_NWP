@@ -80,7 +80,7 @@ def buildGraph(graphData, nodeColorsDict):
     #riverWorldGraph.add_edges_from(edges)
     
     # generate the graph
-    net_RiverWorld.from_nx(riverWorldGraph)
+    #net_RiverWorld.from_nx(riverWorldGraph)
     
     net_RiverWorld.save_graph('L3_RiverGraph.html')
     HtmlFile = open(f'L3_RiverGraph.html', 'r', encoding='utf-8')
