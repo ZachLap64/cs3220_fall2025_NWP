@@ -1,3 +1,2 @@
-App's link for the Romania Navigation Agent
-
-https://cs3220fall2025-lab3example.streamlit.app/
+https://lab3riverapp-fkhe3u5ufdeqtcbjiiw5t4.streamlit.app/
+Task 1
