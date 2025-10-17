@@ -18,8 +18,10 @@ actions_dict = {
 def makeMaze(n):
   size = (n,n)
   proba_0 =0.25 # resulting array will have 25% of zeros (asteroids)
-  #proba_enemies =0.10 # resulting array will have 10% of enemies
-  arrMaze=np.random.choice([0, 1], size=size, p=[proba_0, 1-proba_0])
+  proba_enemies =0.10 # resulting array will have 10% of enemies
+  arrMaze=np.random.choice([0, 1, 2], size=size, p=[proba_0, 1-proba_0-proba_enemies, proba_enemies ])
+  arrMaze[0][1] = 1
+  arrMaze[4][3] = 1
   return arrMaze
 
 
