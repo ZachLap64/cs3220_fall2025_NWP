@@ -3,7 +3,7 @@ from src.graphProblemClass import GraphProblem
 from src.maze2025GraphClass import mazeGraph
 from src.mazeProblemClass import MazeProblem
 from src.PS_agentPrograms import BestFirstSearchAgentProgram
-from src.agents import ProblemSolvingMazeAgentBFS
+from src.agents import *
 from pyvis.network import Network 
 from src.naigationEnvironmentClass import MazeNavigationEnvironment
 
@@ -98,6 +98,10 @@ BFS_MazeAgent2=ProblemSolvingMazeAgentBFS(initState,mazeWorldGraph,goalState)
 print(BFS_MazeAgent2.performance)
 print(initState,goalState)
 intTupleTostr(goalState)
+iDLS_agent = ProblemSolvingMazeAgentIDLS(initState,mazeWorldGraph,goalState)
+print(iDLS_agent.performance)
+
+
 
 #adjusting colours
 nodeColors.setdefault('goal', "green")
@@ -111,5 +115,6 @@ for node in net_maze.nodes:
 #net_maze.show("graphMaze1.html", notebook=False)
 
 maze_Env1.add_thing(BFS_MazeAgent2)
-maze_Env1.step()
+maze_Env1.add_thing(iDLS_agent)
+#maze_Env1.step()
 maze_Env1.run()
