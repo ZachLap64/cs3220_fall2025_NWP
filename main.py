@@ -4,6 +4,7 @@ from src.maze2025GraphClass import mazeGraph
 from src.mazeProblemClass import MazeProblem
 from src.PS_agentPrograms import BestFirstSearchAgentProgram
 from src.agents import *
+from src.enemyClass import Enemy
 from pyvis.network import Network 
 from src.naigationEnvironmentClass import MazeNavigationEnvironment
 
@@ -39,14 +40,17 @@ net_maze = Network( heading="Lab4. Examples of Maze World Problem",
 ) # do this
 nodeColors={
     "wall":"red",
-    "path": "white"
+    "path": "white",
+    "enemy":"orange"
 }
 nodeColorsList=[]
 for node in mazeWorldGraph.origin.keys():
     if maze1[node[0],node[1]]==1:
         nodeColorsList.append(nodeColors["path"])
-    else:
+    elif maze1[node[0],node[1]]==0:
         nodeColorsList.append(nodeColors["wall"])
+    else:
+        nodeColorsList.append(nodeColors["enemy"])
 nodeColorsList
 nodes=["-".join(str(item) for item in el) for el in mazeWorldGraph.origin.keys()]
 #print(nodes)
@@ -102,6 +106,16 @@ iDLS_agent = ProblemSolvingMazeAgentIDLS(initState,mazeWorldGraph,goalState)
 print(iDLS_agent.performance)
 
 
+
+enemies = []
+for node in net_maze.nodes:
+    if node['color']=='orange':
+        tmp = node['id'].split('-')
+        tmp[0] = int(tmp[0])
+        tmp[1] = int(tmp[1])
+        enemies.append(Enemy(tuple(tmp)))
+for i in enemies:
+    maze_Env1.add_thing(i)
 
 #adjusting colours
 nodeColors.setdefault('goal', "green")
