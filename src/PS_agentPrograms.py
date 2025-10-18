@@ -68,7 +68,7 @@ def depth_limited_search(node, goal, limit, problem):
         return node
     if limit == 0:
         return None
-    print(node)
+    #print(node)
     for child in node.expand(problem):
         result = depth_limited_search(child, goal, limit - 1, problem)
         #print(result)
