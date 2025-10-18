@@ -49,70 +49,33 @@ def BestFirstSearchAgentProgram(f=None):
  
 def IDSearchAgentProgram(f=None):
   def program(problem):
-    # maxDepth = 1000
-    # for depth in range(maxDepth):
-    #    result = depth_limited_search(problem, depth)
-    #    if problem.goal_test(result):
-    #     return result
-    #def iterative_deepening_search(problem):
-      depth = 0
-      while True:
-        result = depth_limited_search(problem, depth)
-        if result != 'cutoff':
+      
+      max_depth = 1000
+      for depth_limit in range(max_depth + 1):
+        result = depth_limited_search(Node(problem.initial), Node(problem.goal), depth_limit, problem)
+        #print(result)
+        if result is not None:
+            print(f"Goal found at depth: {depth_limit}")
             return result
-        depth += 1
+      print("Goal not found within max_depth.")
+      return None
 
   return program
 
-def depth_limited_search(problem, limit):
-      node = Node(problem.initial)
-      print("start of recusion")
-      return recursive_dls(node, problem, limit)
 
-def recursive_dls(node, problem, limit):
-      if problem.goal_test(node.state):
-        return node.solution()
-      elif node.depth == 0:
-        print("returning cutoff")
-        return 'cutoff'
-      else:
-        cutoff_occurred = False
-        print("in recursion")
-        for child in node.expand(problem):
-            result = recursive_dls(child, problem, limit - 1)
-            if result == 'cutoff':
-                cutoff_occurred = True
-            elif result != 'failure':
-                return result
-        return 'cutoff' if cutoff_occurred else 'failure'
+def depth_limited_search(node, goal, limit, problem):
+    if node == goal:
+        return node
+    if limit == 0:
+        return None
+    print(node)
+    for child in node.expand(problem):
+        result = depth_limited_search(child, goal, limit - 1, problem)
+        #print(result)
+        if result is not None:
+            return result
+    return None
 
-#def depth_limited_search(graph, current, goal, limit, path):
-    # path.append(current)
-
-    # if current == goal:
-    #     return path
-
-    # if limit <= 0:
-    #     path.pop()
-    #     return None
-
-    # for neighbor in graph.get(current, []):
-    #     if neighbor not in path:
-    #         result = depth_limited_search(graph, neighbor, goal, limit - 1, path)
-    #         if result is not None:
-    #             return result
-
-    # path.pop()
-    # return None
-
-# def iterative_deepening_search(graph, start, goal, max_depth=100):
-#     for depth in range(max_depth):
-#         path = []
-#         print(f"Trying depth limit: {depth}")
-#         result = depth_limited_search(graph, start, goal, depth, path)
-#         if result is not None:
-#             return result
-#     return None
 
  
  
