@@ -47,36 +47,37 @@ def BestFirstSearchAgentProgram(f=None):
     return program
   
  
-# def IDSearchAgentProgram(f=None):
-#   def program(problem):
-#     #your code here
-def depth_limited_search(graph, current, goal, limit, path):
-    path.append(current)
+def IDSearchAgentProgram(f=None):
+  def program(problem):
+      
+      max_depth = 1000
+      for depth_limit in range(max_depth + 1):
+        result = depth_limited_search(Node(problem.initial), Node(problem.goal), depth_limit, problem)
+        #print(result)
+        if result is not None:
+            print(f"Goal found at depth: {depth_limit}")
+            return result
+      print("Goal not found within max_depth.")
+      return None
 
-    if current == goal:
-        return path
+  return program
 
-    if limit <= 0:
-        path.pop()
+
+def depth_limited_search(node, goal, limit, problem):
+    if node == goal:
+        return node
+    if limit == 0:
         return None
-
-    for neighbor in graph.get(current, []):
-        if neighbor not in path:
-            result = depth_limited_search(graph, neighbor, goal, limit - 1, path)
-            if result is not None:
-                return result
-
-    path.pop()
-    return None
-
-def iterative_deepening_search(graph, start, goal, max_depth=100):
-    for depth in range(max_depth):
-        path = []
-        print(f"Trying depth limit: {depth}")
-        result = depth_limited_search(graph, start, goal, depth, path)
+    print(node)
+    for child in node.expand(problem):
+        result = depth_limited_search(child, goal, limit - 1, problem)
+        #print(result)
         if result is not None:
             return result
-    return None  
+    return None
+
+
+ 
  
 
 
