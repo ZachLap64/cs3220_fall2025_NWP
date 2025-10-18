@@ -1,10 +1,12 @@
 from src.environmentClass import Environment
+import math
 
 
 class MazeNavigationEnvironment(Environment):
   def __init__(self, navGraph):
     super().__init__()
     self.status = navGraph
+    self.enemies = []
     
 
   def percept(self, agent):
@@ -34,7 +36,26 @@ class MazeNavigationEnvironment(Environment):
         -1 for each move."""
         agent.state=agent.update_state(agent.state, action)
         agent.performance -= 1
+        if agent.state == "down":
+          agent.location = (agent.location[0]+1,agent.location[1])
+        elif agent.state == "right":
+          agent.location = (agent.location[0],agent.location[1]+1)
+        elif agent.state == "down":
+          agent.location = (agent.location[0]-1,agent.location[1])
+        elif agent.state == "left":
+          agent.location = (agent.location[0],agent.location[1]-1)
         print(f"Agent in {agent.state} with performance = {agent.performance}")
+        for i in self.enemies:
+          #print("agent.location" + str(agent.location) + ", enemy.location"+str(i.location))
+          if agent.location == i.location:
+            print("Agent moved into enemy territory!")
+            #print(f"Agent power: {agent.performance} vs. enemy power: {i.power}")
+            if i.power >= 2*agent.performance:
+              print("Agent has been captured!")
+              agent.performance = 0
+            else:
+              print("Agent has activated defense mode!")
+              agent.performance = math.floor(agent.performance*0.9)
         self.update_agent_alive(agent)
 
         # if action == 'Right':
@@ -72,3 +93,19 @@ class MazeNavigationEnvironment(Environment):
     else:
         print("There is no one here who could work...")
     
+    
+  def add_thing(self, thing, location=None):
+    #from agentClass import Agent
+    from src.problemSolvingAgentProgramClass import SimpleProblemSolvingAgentProgram
+    from src.enemyClassH import Enemy
+    if thing in self.agents:
+      print("Can't add the same agent twice")
+    else:
+      if isinstance(thing, SimpleProblemSolvingAgentProgram):
+        thing(thing.state)
+        #thing.performance = 0
+        #thing.location = location if location is not None else self.default_location(thing)
+        print(f"The Agent in {thing.state} with performance {thing.performance}")
+        self.agents.append(thing)
+      elif isinstance(thing, Enemy):
+        self.enemies.append(thing)
