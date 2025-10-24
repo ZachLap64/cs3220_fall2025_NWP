@@ -9,6 +9,8 @@ from src.maze2025GraphClass import mazeGraph
 from pyvis.network import Network
 from src.mazeProblemClass import MazeProblem
 from src.nodeClass import Node
+from src.ghostClass import Ghost
+from src.foodPelletClass import FoodPellet
 import math
 from src.PS_agentPrograms import *
 from src.agents import *
@@ -92,7 +94,13 @@ net_maze.toggle_physics(False)
 
 #--------------------------------------------------------------------
 
-initState, goalState=(0,1),(2,4)
+#initState, goalState=(0,1),(2,4)
+initState = (0,1)
+goalState = []
+for i in range(len(maze1)):
+    for j in range(len(maze1[0])):
+        if maze1[i][j] == 2:
+            goalState.append((i,j))
 mp1=MazeProblem(initState,goalState,mazeWorldGraph2)
 testState=(0,2)
 #print(mp1.actions(testState))
@@ -114,6 +122,22 @@ mp2=MazeProblem(initState,goalState,mazeWorldGraph2)
 
 print(initState,goalState)
 intTupleTostr(goalState)
+
+enemies = []
+for i in range(len(maze1)):
+    for j in range(len(maze1[0])):
+        if maze1[i][j] == 3:
+            enemies.append(Ghost((i,j)))
+for i in enemies:
+    PacmanWorld1.add_thing(i)
+food = []
+for i in range(len(maze1)):
+    for j in range(len(maze1[0])):
+        if maze1[i][j] == 2:
+            food.append(FoodPellet((i,j)))
+for i in food:
+    PacmanWorld1.add_thing(i)
+
 nodeColors.setdefault('goal', "green")
 nodeColors.setdefault('init', "gold")
 for node in net_maze.nodes:
