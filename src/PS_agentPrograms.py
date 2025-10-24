@@ -133,9 +133,51 @@ def BestFirstSearchAgentProgram(f=None):
     return program
   
  
-# def IDSearchAgentProgram(f=None):
-#   def program(problem):
-#     #your code here
+def IDAStarSearchAgentProgram(f=None):
+  def program(problem):
+      
+      max_depth = 10000
+      root = Node(problem.initial)
+      #print(type(root))
+      #node = Node(problem.initial)
+      fLimit = abs(root.state[0]-problem.goal[0])+abs(root.state[1]-problem.goal[1])
+      #print(type(fLimit))
+      reached = {problem.initial:root}
+      for depth_limit in range(max_depth + 1):
+        solution, fLimit = DFS_Contour(root, fLimit, problem, reached)
+        #print(root)
+        #print(type(solution))
+        #print(type(fLimit))
+        if solution is not None:
+            #print(f"Goal found at depth: {depth_limit}")
+            return solution
+      print("Goal not found.")
+      return None
+
+  return program
+
+
+def DFS_Contour(node, fLimit, problem, reached):
+    nextfLimit = 10000
+    print(node.state)
+    print(f"Path cost {node.path_cost}")
+    fCost = node.path_cost + abs(node.state[0]-problem.goal[0])+abs(node.state[1]-problem.goal[1])
+    if fCost > fLimit:
+        return None, fCost
+    #if node == Node(problem.goal):
+    #if problem.goal_test(node.state):
+    if node.state == problem.goal:
+        return node, fLimit
+    #print(node)
+    for child in node.expand(problem):
+        if child.state not in reached or child.path_cost<reached[child.state].path_cost:
+          reached.update({child.state:child})
+          solution, newfLimit = DFS_Contour(child, fLimit, problem, reached)
+          #print(result)
+          if solution is not None:
+            return solution, fLimit
+          nextfLimit = min(nextfLimit, newfLimit)
+    return None, nextfLimit
     
  
       

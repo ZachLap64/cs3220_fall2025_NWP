@@ -126,5 +126,8 @@ for node in net_maze.nodes:
 
 Astar_PacManAgent3=ProblemSolvingMazeAgentAstarMANHAT(initState,mazeWorldGraph2,goalState)
 print(f"Agent performance: {Astar_PacManAgent3.performance}")
+Astar_PacManAgent4=ProblemSolvingMazeAgentIDAStar(initState,mazeWorldGraph2,goalState)
+print(f"Agent performance: {Astar_PacManAgent4.performance}")
 PacmanWorld1.add_thing(Astar_PacManAgent3)
+PacmanWorld1.add_thing(Astar_PacManAgent4)
 PacmanWorld1.run()
