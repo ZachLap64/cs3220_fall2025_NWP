@@ -10,8 +10,8 @@ from pyvis.network import Network
 from src.mazeProblemClass import MazeProblem
 from src.nodeClass import Node
 import math
-from src.PS_agentPrograms import A_StarSearchAgentProgram
-from src.agents import ProblemSolvingMazeAgentAstar
+from src.PS_agentPrograms import *
+from src.agents import *
 from src.naigationEnvironmentClass import MazeNavigationEnvironment
 
 n=10
@@ -124,7 +124,7 @@ for node in net_maze.nodes:
 #Graph with goal highlighted
 #net_maze.show("PacmanWorld1.html", notebook=False)
 
-Astar_PacManAgent3=ProblemSolvingMazeAgentAstar(initState,mazeWorldGraph2,goalState)
+Astar_PacManAgent3=ProblemSolvingMazeAgentAstarMANHAT(initState,mazeWorldGraph2,goalState)
 print(f"Agent performance: {Astar_PacManAgent3.performance}")
 PacmanWorld1.add_thing(Astar_PacManAgent3)
 PacmanWorld1.run()

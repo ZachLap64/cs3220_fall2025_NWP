@@ -26,6 +26,8 @@ def A_StarSearchAgentProgram(f=None):
       frontier.put((h,node))
       reached = {problem.initial:node}
 
+      counter = 0
+
       while frontier:
         print(frontier.queue)
         node = frontier.get()[1]
@@ -33,6 +35,7 @@ def A_StarSearchAgentProgram(f=None):
 
         if problem.goal_test(node.state):
           print("We have found our goal: {}".format (node.state))
+          print(f"Number of child nodes expanded {counter}")
           return node
 
         #reached.add(node.state)
@@ -42,6 +45,48 @@ def A_StarSearchAgentProgram(f=None):
                 print("The child node {}.".format(child))
                 h=child.path_cost+round(f(child.state, problem.goal),3)
                 frontier.put((h,child))
+                counter=counter+1
+                reached.update({child.state:child})
+            
+      return None
+
+    return program
+
+
+def A_StarSearchAgentProgramMANHAT(f=None):
+  
+    #f=math.dist
+    
+    def program(problem):
+      print("Hi")
+
+      node = Node(problem.initial)
+ 
+      frontier = PriorityQueue()
+      h=node.path_cost+abs(node.state[0]-problem.goal[0])+abs(node.state[1]-problem.goal[1])
+      frontier.put((h,node))
+      reached = {problem.initial:node}
+
+      counter = 0
+
+      while frontier:
+        print(frontier.queue)
+        node = frontier.get()[1]
+        print("The node {} is extracted from frontier:".format(node.state))
+
+        if problem.goal_test(node.state):
+          print("We have found our goal: {}".format (node.state))
+          print(f"Number of child nodes expanded {counter}")
+          return node
+
+        #reached.add(node.state)
+        for child in node.expand(problem):
+            if child.state not in reached or child.path_cost<reached[child.state].path_cost:
+                #print(child)
+                print("The child node {}.".format(child))
+                h=child.path_cost+abs(child.state[0]-problem.goal[0])+abs(child.state[1]-problem.goal[1])
+                frontier.put((h,child))
+                counter=counter+1
                 reached.update({child.state:child})
             
       return None
