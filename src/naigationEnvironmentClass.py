@@ -116,3 +116,4 @@ class MazeNavigationEnvironment(Environment):
         self.ghosts.append(thing)
       elif isinstance(thing, FoodPellet):
         self.food.append(thing)
+

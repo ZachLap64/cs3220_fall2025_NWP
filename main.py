@@ -96,11 +96,36 @@ net_maze.toggle_physics(False)
 
 #initState, goalState=(0,1),(2,4)
 initState = (0,1)
-goalState = []
+foodStates = []
 for i in range(len(maze1)):
     for j in range(len(maze1[0])):
         if maze1[i][j] == 2:
-            goalState.append((i,j))
+            foodStates.append((i,j))
+#print(foodStates)
+goalState = []
+currLoc = Node((0,1))
+while foodStates != []:
+    #currLoc = Node((0,1))
+    h = 1000
+    j = None
+    
+    for i in foodStates:
+        #print(f"currLoc = {currLoc}, h={h}, j={j}, i={i}")
+        tmp=currLoc.path_cost+abs(currLoc.state[0]-i[0])+abs(currLoc.state[1]-i[1])
+        if tmp < h:
+            h = tmp
+            j = i
+    currLoc = Node(j)
+    goalState.append(j)
+    if j != None:
+        #print(foodStates)
+        foodStates.remove(j)
+#print(goalState)
+
+
+
+    
+#node.path_cost+abs(node.state[0]-problem.goal[0])+abs(node.state[1]-problem.goal[1])
 mp1=MazeProblem(initState,goalState,mazeWorldGraph2)
 testState=(0,2)
 #print(mp1.actions(testState))
