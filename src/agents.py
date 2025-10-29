@@ -45,6 +45,11 @@ def ProblemSolvingMazeAgentAstarMANHAT(initState,mazeWorldGraph,goalState):
     #return MazeProblemSolvingAgentSMART(initState,mazeWorldGraph,goalState,Astar_AP_EvcDist)
     return MazeProblemSolvingAgentSMART(initState,mazeWorldGraph,goalState,A_StarSearchAgentProgramMANHAT(math.dist))
 
+def ProblemSolvingMazeAgentIDAStar(initState,mazeWorldGraph,goalState):
+    #Astar_AP_EvcDist=A_StarSearchAgentProgram(math.dist)
+    #return MazeProblemSolvingAgentSMART(initState,mazeWorldGraph,goalState,Astar_AP_EvcDist)
+    return MazeProblemSolvingAgentSMART(initState,mazeWorldGraph,goalState,IDAStarSearchAgentProgram(math.dist))
+
 # def ProblemSolvingMazeAgentBFS(initState,mazeWorldGraph,goalState):
 #     return MazeProblemSolvingAgentSMART(initState,mazeWorldGraph,goalState,BestFirstSearchAgentProgram())
 
