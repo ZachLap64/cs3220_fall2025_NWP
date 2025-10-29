@@ -26,8 +26,17 @@ def makeMaze(n):
   proba_0 =0.2 # resulting array will have 20% of zeros
   proba_food =0.1 # resulting array will have 10% of food pellets
   arrMaze=np.random.choice([0, 1,2], size=size, p=[proba_0, 1-proba_0-proba_food,proba_food])
-  arrMaze[0][1] = 1
-  arrMaze[2][4] = 1
+
+  arrMaze[0][1]=1
+  arrMaze[2][4]=1
+  ghosts = 0
+  while ghosts<5:
+    tmp1, tmp2 = random.randint(0,9),random.randint(0,9)
+    if tmp1 != 0 and tmp2 != 1 and tmp1 != 2 and tmp2 != 4:
+      if arrMaze[tmp1][tmp2] not in [0,2]:
+        arrMaze[tmp1][tmp2] = 3
+        ghosts += 1
+
   return arrMaze
 
 

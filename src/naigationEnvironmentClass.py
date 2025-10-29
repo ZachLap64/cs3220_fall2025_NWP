@@ -1,10 +1,13 @@
 from src.environmentClass import Environment
+import math
 
 
 class MazeNavigationEnvironment(Environment):
   def __init__(self, navGraph):
     super().__init__()
     self.status = navGraph
+    self.ghosts = []
+    self.food = []
     
 
   def percept(self, agent):
@@ -34,7 +37,30 @@ class MazeNavigationEnvironment(Environment):
         -1 for each move."""
         agent.state=agent.update_state(agent.state, action)
         agent.performance -= 1
+        if agent.state == "down":
+          agent.location = (agent.location[0]+1,agent.location[1])
+        elif agent.state == "right":
+          agent.location = (agent.location[0],agent.location[1]+1)
+        elif agent.state == "down":
+          agent.location = (agent.location[0]-1,agent.location[1])
+        elif agent.state == "left":
+          agent.location = (agent.location[0],agent.location[1]-1)
         print(f"Agent in {agent.state} with performance = {agent.performance}")
+        for i in self.ghosts:
+          if agent.location == i.location:
+            print("Agent ran into a ghost!")
+            if agent.performance > agent.strongThresh:
+              print("Agent beat the ghost!")
+              agent.performance = math.floor(agent.performance*0.9)
+            else:
+              print("Agent was beaten by the ghost!")
+              agent.performance=0
+        if self.food != None:
+          for i in self.food:
+            if agent.location == i.location:
+              print("Agent ate a food pellet!")
+              agent.performance *= 2
+              self.food.remove(i)
         self.update_agent_alive(agent)
 
         # if action == 'Right':
@@ -71,4 +97,23 @@ class MazeNavigationEnvironment(Environment):
           self.execute_action(agent, action)
     else:
         print("There is no one here who could work...")
-    
+  
+  def add_thing(self, thing, location=None):
+    #from agentClass import Agent
+    from src.problemSolvingAgentProgramClass import SimpleProblemSolvingAgentProgram
+    from src.ghostClass import Ghost
+    from src.foodPelletClass import FoodPellet
+    if thing in self.agents:
+      print("Can't add the same agent twice")
+    else:
+      if isinstance(thing, SimpleProblemSolvingAgentProgram):
+        thing(thing.state)
+        thing.performance = 33
+        #thing.location = location if location is not None else self.default_location(thing)
+        print(f"The Agent in {thing.state} with performance {thing.performance}")
+        self.agents.append(thing)
+      elif isinstance(thing, Ghost):
+        self.ghosts.append(thing)
+      elif isinstance(thing, FoodPellet):
+        self.food.append(thing)
+
