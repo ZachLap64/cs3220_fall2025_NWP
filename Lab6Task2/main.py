@@ -57,46 +57,9 @@ def main():
         vars=list(basicSudokuCSP.variables)
         #print("test1 "+str(vars))
         #buildGraph(basicSudokuCSP, nodeColors)
-        st.write(basicSudokuCSP.domains)
-        
-        j=0
-        for i in range(num_rows):
-            # Create a set of columns for each row
-            cols = st.columns(columns_per_row)
-            
-            # Place elements within each column of the current row
-            #img = Image.open("images/top_spiderman.png")
-            #st.button(st.image(img))
-            
-            for col_index, col in enumerate(cols):
-                with col:
-                    options=basicSudokuCSP.domains[vars[j]]
-                    if len(options)==1:
-                        val=options[0]
-                        #print(val, imgCell[str(val)])
-                        #st_image_button(f"{vars[j]}",imgCell[str(val)] , key=f"button_{vars[j]}")
-                        #img = Image.open(imgCell[str(val)])
-                        #st.button("",icon=imgCell[str(val)])
-                            #st.session_state.last_click = vars[j]
-                                         
-                        #if st_image_button(f"{vars[j]}",imgCell[str(val)] , key=f"button_{vars[j]}"):
-                            #st.session_state.last_click = vars[j]
-                    else:
-                        val="empty"
-                        #print(val, imgCell[val])
-                        #st_image_button(f"{vars[j]}",imgCell[val] , key=f"button_{vars[j]}")
-                        #img = Image.open(imgCell[val])
-                        #st.button("", icon=imgCell[val])
-                            #st.session_state.last_click = vars[j]
-                        
-                        #print(val, imgCell[str(val)])     
-                        #if st_image_button(f"{vars[j]}",imgCell[val] , key=f"button_{vars[j]}"):
-                            #st.session_state.last_click = vars[j]
-                j+=1
-
-        # Display the coordinates of the last clicked cell
-        #if 'last_click' in st.session_state:
-            #st.write(f"You clicked cell: {st.session_state.last_click}")
+        print(type(basicSudokuCSP.domains))
+        for i in basicSudokuCSP.domains.keys():
+            st.write(i + "'s domain is: " + str(basicSudokuCSP.domains[i]))
             
         
     with tab2:
@@ -249,4 +212,5 @@ def buildGraph(SudokuCSP, nodeColors, ac3=False):
     
 if __name__ == '__main__':
     main()
+
         
