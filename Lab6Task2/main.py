@@ -56,7 +56,8 @@ def main():
         columns_per_row = 9
         vars=list(basicSudokuCSP.variables)
         #print("test1 "+str(vars))
-        buildGraph(basicSudokuCSP, nodeColors)
+        #buildGraph(basicSudokuCSP, nodeColors)
+        st.write(basicSudokuCSP.domains)
         
         j=0
         for i in range(num_rows):
