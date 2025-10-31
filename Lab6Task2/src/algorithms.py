@@ -5,12 +5,12 @@ from src.utils import first
 def AC3(csp):
   queue = Queue()
   
-  print(f"Initial queue:")
+  #print(f"Initial queue:")
   for Xi in csp.variables:
     for Xk in csp.neighbors[Xi]:
       queue.put((Xi, Xk))
-      print((Xi, Xk), end=" ")
-    print()
+      #print((Xi, Xk), end=" ")
+    #print()
    
   csp.support_pruning()
   checks = 0
@@ -24,7 +24,7 @@ def AC3(csp):
       for Xk in csp.neighbors[Xi]:
         if Xk != Xj:
           queue.put((Xk, Xi))
-    print(f"Queue: {list(queue.queue)}")
+    #print(f"Queue: {list(queue.queue)}")
 
     '''print(f'Arc {(Xj, Xi)} is cheking')
     revised, checks1 = back_revise(csp, Xi, Xj, checks)

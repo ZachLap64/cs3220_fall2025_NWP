@@ -1,7 +1,7 @@
 # Import dependencies
 import streamlit as st
 import streamlit.components.v1 as components #to display the HTML code
-from st_image_button import st_image_button
+#from st_image_button import st_image_button
 
 import networkx as nx #Networkx for creating graph data
 from pyvis.network import Network #to create the graph as an interactive html object
@@ -48,32 +48,15 @@ def main():
         
     
     with tab1:
-        st.header("CSP: Simple Sudoku Example")
+        st.header("Pre-AC3 Asterisk Sudoku")
         
         # Define the number of rows you want
-        num_rows = 3
+        num_rows = 9
         # Define the number of columns per row
-        columns_per_row = 3
+        columns_per_row = 9
         vars=list(basicSudokuCSP.variables)
-        print("test1 "+str(vars))
-        
-        '''j=0
-        
-        for i in range(num_rows):
-            # Create a set of columns for each row
-            cols = st.columns(columns_per_row)
-            
-            # Place elements within each column of the current row
-            for col_index, col in enumerate(cols):
-                with col:
-                    st.write(vars[j])
-                    options=basicSudokuCSP.domains[vars[j]]
-                    if len(options)==1:
-                        st.text_input("filled",value=options[0], disabled =True, key=f"filled_cell_{vars[j]}", label_visibility="hidden")
-                        #st.number_input("filled",value=options[0], disabled =True, key=f"filled_cell_{vars[j]}", label_visibility="hidden", step=None)
-                    else:
-                        st.selectbox("select",options,label_visibility="hidden", key=f"empty_cell_{vars[j]}")
-                j+=1'''
+        #print("test1 "+str(vars))
+        buildGraph(basicSudokuCSP, nodeColors)
         
         j=0
         for i in range(num_rows):
