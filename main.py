@@ -83,4 +83,4 @@ for node, nbrs in scheduleCSP.neighbors.items():
         net2.add_edge(node, nbr)
 
 # Save and open in browser
-net2.show("graph_with_domains.html", notebook=False)
+net2.show("graph_with_domains2.html", notebook=False)
