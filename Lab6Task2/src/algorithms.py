@@ -16,7 +16,6 @@ def AC3(csp):
   checks = 0
   while list(queue.queue):
     (Xi, Xj) = queue.get()
-    #print(f'Arc {(Xi, Xj)} is cheking')
     revised, checks = revise(csp, Xi, Xj, checks)
     if revised:
       if not csp.curr_domains[Xi]:
