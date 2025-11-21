@@ -12,6 +12,7 @@ class CSPBasic(Problem):
         self.initial = ()
         self.curr_domains = None
         self.nassigns = 0
+        self.result = None
 
       # These are for constraint propagation
 
