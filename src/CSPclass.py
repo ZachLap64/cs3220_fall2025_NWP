@@ -44,7 +44,7 @@ class CSP(CSPBasic):
 
         # Subclasses may implement this more efficiently
         def conflict(var2):
-            return var2 in assignment and not self.constraints(var, val, var2, assignment[var2])
+            return var2 in assignment and not self.constraints(var, val, var2, assignment[var2], self, assignment)
 
         return count(conflict(v) for v in self.neighbors[var])
 

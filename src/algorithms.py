@@ -49,7 +49,7 @@ def revise(csp, Xi, Xj, checks=0):
         conflict = True
         #print(csp.curr_domains[Xj])
         for y in csp.curr_domains[Xj]:
-            if csp.constraints(Xi, x, Xj, y):
+            if csp.constraints(Xi, x, Xj, y, csp):
                 conflict = False
             checks += 1
             if not conflict:
@@ -69,7 +69,7 @@ def back_revise(csp, Xi, Xj, checks=0):
         for y in csp.curr_domains[Xj]:
             conflict = False
             #print(y)
-            if csp.constraints(Xi, x, Xj, y)==False:
+            if csp.constraints(Xi, x, Xj, y, csp)==False:
               #print(x,y)
               conflict = True
             checks +=1
