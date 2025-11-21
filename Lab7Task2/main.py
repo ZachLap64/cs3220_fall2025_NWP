@@ -37,6 +37,7 @@ def main():
             st.session_state["clicked"]=True
             result = backtracking_search(basicSudokuCSP)
             print(result)
+            basicSudokuCSP.result = result
             backtrack=True
             
             
@@ -53,7 +54,7 @@ def main():
         #print("test1 "+str(vars))
         buildGraph(basicSudokuCSP, nodeColors)
         #print(basicSudokuCSP.domains)
-        basicSudokuCSP.support_pruning()
+        #basicSudokuCSP.support_pruning()
         #print(basicSudokuCSP.curr_domains)
         
 
@@ -129,12 +130,11 @@ def buildGraph(SudokuCSP, nodeColors, backtrack=False):
     #print(SudokuCSP.curr_domains)
 
     for node in nodes:
-        #print("in node for")
         if len(SudokuCSP.domains[node])==1:
             nodeColorsDict.setdefault(node,nodeColors["filled"])
             if backtrack:
                 print("in if")
-                nodeTitlesDict.setdefault(node,str(SudokuCSP.curr_domains[node][0]))
+                nodeTitlesDict.setdefault(node,str(SudokuCSP.result[node]))
             else:
                 nodeTitlesDict.setdefault(node,str(SudokuCSP.domains[node][0]))
             nodeLabelsDict.setdefault(node,str(SudokuCSP.domains[node][0]))           
@@ -142,7 +142,7 @@ def buildGraph(SudokuCSP, nodeColors, backtrack=False):
             nodeColorsDict.setdefault(node,nodeColors["empty"])
             if backtrack:
                 print("in else")
-                string_list = [str(i) for i in SudokuCSP.curr_domains[node]]
+                string_list = [str(SudokuCSP.result[node])]
                
             else:
                 string_list = [str(i) for i in SudokuCSP.domains[node]]
