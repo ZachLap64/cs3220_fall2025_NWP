@@ -98,6 +98,7 @@ def unordered_domain_values(var, assignment, csp):
 
 def backtracking_search(csp, select_unassigned_variable=first_unassigned_variable, order_domain_values=unordered_domain_values):
     print("inside the backtrack search")
+    #csp.support_pruning()
     def backtrack(assignment):
         if len(assignment) == len(csp.variables):
             return assignment
