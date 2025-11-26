@@ -78,4 +78,39 @@ def shuffled(iterable):
     random.shuffle(items)
     return items
 
-
+# Constraint function
+def schedule_constraints(X, x, Y, y):
+    """
+    X, Y: variable names (strings)
+    x, y: values (day, slot) tuples
+    Returns True if assignment is valid, False otherwise
+    """
+    day_x, slot_x = x
+    day_y, slot_y = y
+    
+    # Constraint 1: No two sessions at same time slot
+    if x == y:
+        return False
+    
+    # Extract course name and type (lec/lab) from variable names
+    course_x = X.rsplit('_', 1)[0]  # e.g., 'PPM' from 'PPM_lec1'
+    type_x = X.rsplit('_', 1)[1][:3]  # e.g., 'lec' from 'PPM_lec1'
+    
+    course_y = Y.rsplit('_', 1)[0]
+    type_y = Y.rsplit('_', 1)[1][:3]
+    
+    # Only apply course-specific constraints if same course
+    if course_x == course_y:
+        # Constraint 2: Two lectures from same course can't be on same day
+        if type_x == 'lec' and type_y == 'lec' and day_x == day_y:
+            return False
+        
+        # Constraint 3: Two lectures from same course can't be on adjacent days
+        if type_x == 'lec' and type_y == 'lec' and abs(day_x - day_y) == 1:
+            return False
+        
+        # Constraint 4: Two labs from same course can't be on adjacent days
+        if type_x == 'lab' and type_y == 'lab' and abs(day_x - day_y) == 1:
+            return False
+    
+    return True
