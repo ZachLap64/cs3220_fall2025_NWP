@@ -112,5 +112,9 @@ def schedule_constraints(X, x, Y, y):
         # Constraint 4: Two labs from same course can't be on adjacent days
         if type_x == 'lab' and type_y == 'lab' and abs(day_x - day_y) == 1:
             return False
-    
+
+        # Constraint 5: (Optional) Two labs from same course can't be on same day
+        #if type_x == 'lab' and type_y == 'lab' and day_x == day_y:
+        #    return False
+        
     return True
