@@ -15,9 +15,9 @@ class FiveMisery:
     def result(self, board, call):
         player = board.to_move
         board = board.new(('O' if player == 'X' else 'X'), call)
-        win = (True if self.count >= 5 else False)
+        win = (True if board.counter >= 5 else False)
         board.utility = 0
-        board.utility = (0 if not win else +1 if player == 'X' else -1)
+        board.utility = (0 if not win else -1 if player == 'X' else +1)
         return board
     
     def utility(self, board, player):
